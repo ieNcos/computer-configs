@@ -39,11 +39,10 @@ local get_visual = function(args, parent)
 end
 return {
 
-s({trig = "([^%a])mm", wordTrig = false, trigEngine = "pattern", snippetType = "autosnippet"},
+s({trig = "mm", wordTrig = true, trigEngine = "pattern", snippetType = "autosnippet"},
   fmta(
-    "<>$<>$",
+    "$<>$",
     {
-      f( function(_, snip) return snip.captures[1] end ),
       d(1, get_visual),
     }
   )
@@ -59,21 +58,22 @@ s({trig = "eq", dscr = "Expands 'eq' into an equation environment"},
   )
 ),
 
-s({trig = "sq", dscr = "description", snippetType = "autosnippet", wordTrig = false, trigEngine = "pattern"},
-  fmta(
-    "\\sqrt{<>}",
-		{ i(1) }
-  ),
-  { conditon = in_mathzone }
-),
-s({trig = "ff", snippetType = "autosnippet", dscr = "Expands 'ff' into '\\frac{}{}'"},
-  fmta(
-    "\\frac{<>}{<>}",
-    { i(1), i(2) }
---    {delimiters = "<>"} -- manually specifying angle bracket delimiters
-  ),
-	{ condition = in_mathzone }
-),
+s({trig = "sq", dscr = "description", snippetType = "autosnippet", wordTrig = false, trigEngine = "plain"}, fmta([[
+\sqrt{<>}
+]], {
+    i(1)
+}), {
+    condition = in_mathzone
+}),
+
+s({trig = "ff", snippetType = "autosnippet", dscr = "Expands 'ff' into '\\frac{}{}'"}, fmta([[
+\frac{<>}{<>}
+]], {
+    i(1),
+    i(2),
+}), {
+    condition = in_mathzone
+}),
 
 s({trig = [[(\d+|\d*\\?[A-Za-z]+(?:\\[A-Za-z]+)*(?:(?:\^|_)(?:\{\w+\}|\w))*)//]] ,
 snippetType = "autosnippet",

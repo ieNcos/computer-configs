@@ -83,6 +83,21 @@ trigEngine = "plain"},fmta([[
     i(0)
 }), {}),
 
+s({trig = "graph",
+dscr = "graphicx",
+snippetType = "snippet",
+wordTrig = true,
+trigEngine = "plain"},fmta([[
+\includegraphics[height=<>cm]{"<>"}
+\caption{<>}
+\label{fig:<>} 
+]], {
+    i(1),
+    i(2),
+    i(3),
+    i(0)
+}), {}),
+
 s({trig = "sec",
 dscr = "section",
 snippetType = "snippet",

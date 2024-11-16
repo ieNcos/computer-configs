@@ -1,1 +1,4 @@
 set selection-clipboard clipboard
+#set synctex true
+#set synctex-editor-command "nvim --remote-silent +%{line} %{input}"
+#set synctex-editor-command "nvim --remote-silent +%{line} %{input}"

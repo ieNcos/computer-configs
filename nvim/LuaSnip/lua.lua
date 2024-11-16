@@ -6,7 +6,7 @@ s({trig = "<>",
 dscr = "<>",
 snippetType = "<>nippet",
 wordTrig = <>,
-trigEngine = <>},fmta([[
+trigEngine = "<>"},fmta([[
 <>
 ]], {
     <>
