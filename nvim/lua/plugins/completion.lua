@@ -1,13 +1,25 @@
 local M = {
-	{'neovim/nvim-lspconfig'},
-	{'hrsh7th/cmp-nvim-lsp'},
+    {
+        'windwp/nvim-autopairs',
+        config = function()
+            require('nvim-autopairs').setup {}
+            require('nvim-autopairs').remove_rule '`'
+        end,
+    },
+
 	{'hrsh7th/cmp-buffer'},
 	{'hrsh7th/cmp-path'},
 	{'hrsh7th/cmp-cmdline'},
 	{'hrsh7th/nvim-cmp'},
 	{'L3MON4D3/LuaSnip'},
 	{'saadparwaiz1/cmp_luasnip'},
-	{'hrsh7th/nvim-cmp',
+	{
+        'hrsh7th/nvim-cmp',
+        --event = 'InsertEnter',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'hrsh7th/cmp-nvim-lsp',
+        },
 		config = function()
 			local cmp = require('cmp')
 			cmp.setup({

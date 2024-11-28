@@ -230,14 +230,20 @@ epub.inherit = "reader_default"
 kra.app_list = [{ command = "krita", fork = true, silent = true }]
 kdenlive.app_list = [{ command = "kdenlive", fork = true, silent = true }]
 
-tex.app_list = [
-  { command = "micro" },
-  { command = "gedit", fork = true, silent = true },
-  { command = "bat", pager = true },
-  { command = "pdflatex" },
-]
+#tex.app_list = [
+#  { command = "micro" },
+#  { command = "gedit", fork = true, silent = true },
+#  { command = "bat", pager = true },
+#  { command = "pdflatex" },
+#]
 
 torrent.app_list = [{ command = "transmission-gtk" }]
+
+ipynb.app_list = [
+    { command = "euporie-notebook" }
+]
+
+
 
 [mimetype]
 

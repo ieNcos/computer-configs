@@ -1,6 +1,8 @@
-require('config.plugin')
-require('config.option')
+require('config.lazy')
+require('config.global')
 require('config.keymap')
+require('config.autocommands')
+
 require('lsp.setup')
 
 ---- 在 init.lua 中添加以下内容

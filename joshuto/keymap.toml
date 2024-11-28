@@ -7,10 +7,10 @@ keymap = [
   { keys = ["T"], commands = ["new_tab --current"] },
   { keys = ["W"], commands = ["close_tab"] },
   { keys = ["ctrl+w"], commands = ["close_tab"] },
-  { keys = ["q"], commands = ["close_tab"] },
+  { keys = ["Q"], commands = ["close_tab"] },
   { keys = ["ctrl+c"], commands = ["quit"] },
   { keys = ["ctrl+z"], commands = ["suspend"] },
-  { keys = ["Q"], commands = ["quit --output-current-directory"] },
+  { keys = ["q"], commands = ["quit --output-current-directory"] },
 
   { keys = ["R"], commands = ["reload_dirlist"] },
   { keys = ["z", "h"], commands = ["toggle_hidden"] },
@@ -18,6 +18,7 @@ keymap = [
   { keys = ["\t"], commands = ["tab_switch 1"] },
   { keys = ["backtab"], commands = ["tab_switch -1"] },
 
+# alt is used by kitty so these won't work, use tab to switch
   { keys = ["alt+1"], commands = ["tab_switch_index 1"] },
   { keys = ["alt+2"], commands = ["tab_switch_index 2"] },
   { keys = ["alt+3"], commands = ["tab_switch_index 3"] },

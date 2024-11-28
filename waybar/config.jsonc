@@ -18,15 +18,15 @@
     ],
     "modules-right": [
         "mpd",
-        "idle_inhibitor",
+        "idle_inhibitor", //'ppt or not
         "pulseaudio",
         "network",
         "power-profiles-daemon",
-        "cpu",
-        "memory",
-        "temperature",
+        //"cpu",
+        //"memory",
+        //"temperature",
         "backlight",
-        "keyboard-state",
+        //"keyboard-state",
         // don't need this
         //"hyprland/language",
         "battery",

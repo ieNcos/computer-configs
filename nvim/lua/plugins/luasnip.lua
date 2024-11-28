@@ -4,30 +4,16 @@ return {
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!).
 	build = "make install_jsregexp",
+    enabled = true,
   config = function()
 		require('luasnip').config.setup({
       -- Enable autotriggered snippets
       enable_autosnippets = true,
       -- Use Tab (or some other key if you prefer) to trigger visual selection
       store_selection_keys = "<Tab>",
-	    update_events = 'TextChanged,TextChangedI',
-	    store_selection_keys = "<Tab>",
-		    })
-	end,
-	--config = function()
-		--require("Luasnip").setup({
-    ---- Enable autotriggered snippets
-    --enable_autosnippets = true,
-    ---- Use Tab (or some other key if you prefer) to trigger visual selection
-    --store_selection_keys = "<Tab>",
-		--})
-	--end
-
-},
-
-
-
-vim.cmd[[
+	  update_events = 'TextChanged,TextChangedI',
+	  })
+      vim.cmd[[
 " Expand snippets in insert mode with Tab
 imap <silent><expr> <c-f> luasnip#expandable() ? '<Plug>luasnip-expand-snippet' : '<c-f>'
 
@@ -43,6 +29,21 @@ smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 imap <silent><expr> <C-n> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-n>'
 smap <silent><expr> <C-n> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-n>'
 ]]
+
+	end,
+	--config = function()
+		--require("Luasnip").setup({
+    ---- Enable autotriggered snippets
+    --enable_autosnippets = true,
+    ---- Use Tab (or some other key if you prefer) to trigger visual selection
+    --store_selection_keys = "<Tab>",
+		--})
+	--end
+
+}
+
+
+
 --hi
 --vim.keymap.set({"i"}, "<C-n>", function() ls.expand() end, {silent = true}),
 --vim.keymap.set({"i", "s"}, "<C-i>", function() ls.jump( 1) end, {silent = true}),
@@ -53,3 +54,4 @@ smap <silent><expr> <C-n> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 --		ls.change_choice(1)
 --	end
 --end, {silent = true})
+

@@ -1,28 +1,3 @@
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.signcolumn = "no"
-vim.o.expandtab = true
-vim.o.tabstop = 4
-vim.o.smarttab = true
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-
-vim.o.conceallevel = 2
-vim.o.history = 1000
-
-vim.g.python_host_prog="/usr/bin/ipython"
-
-vim.cmd([[
-au InsertLeave *.tex write
-]])
-vim.cmd([[
-set termencoding=utf-8
-set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
-]])
-vim.cmd([[
-highlight Normal guibg=NONE ctermbg=NONE
-]])
-
 vim.api.nvim_create_autocmd( 'FileType', { pattern = {"clojure", "python", "rust", "c", "lua", "cpp", "fish", "markdown", "haskell", "latex"},
     callback = function ()
         vim.treesitter.start()

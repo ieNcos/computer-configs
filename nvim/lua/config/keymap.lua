@@ -1,6 +1,41 @@
 --keymaps
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local wk = require 'which-key'
+
+local nmap = function (key, effect)
+    vim.keymap.set('n', key, effect, { silent = true, noremap = true })
+end
+
+
+local imap = function (key, effect)
+    vim.keymap.set('i', key, effect, { silent = true, noremap = true })
+end
+
+local vmap = function (key, effect)
+    vim.keymap.set('v', key, effect, { silent = true, noremap = true })
+end
+
+local nvmap = function (key, effect)
+    vim.keymap.set({'n', 'v'}, key, effect, { silent = true, noremap = true })
+end
+
+nvmap("j", 'h')
+nvmap("k", 'gj')
+nvmap("l", 'gk')
+nvmap(";", 'l')
+nvmap("K", '5gj')
+nvmap("L", '5gk')
+
+nvmap("<leader>na", "I# <esc>")
+nvmap("<leader>nx", "^xx")
+
+
+
+nmap('<leader>dd', function ()
+    vim.diagnostic.disable()
+end)
+
+
+
 
 
 local mode_nv = { "n", "v" }
@@ -24,12 +59,12 @@ local nmappings = {
     --	{ from = "`",             to = "~",                                                                   mode = mode_nv },
     --
     -- Movement
-    { from = "l",          to = "gk",                     mode = mode_nv },
-    { from = "k",          to = "gj",                     mode = mode_nv },
-    { from = "j",          to = "h",                      mode = mode_nv },
-    { from = ";",          to = "l",                      mode = mode_nv },
-    { from = "L",          to = "5gk",                     mode = mode_nv },
-    { from = "K",          to = "5gj",                     mode = mode_nv },
+    --{ from = "l",          to = "gk",                     mode = mode_nv },
+    --{ from = "k",          to = "gj",                     mode = mode_nv },
+    --{ from = "j",          to = "h",                      mode = mode_nv },
+    --{ from = ";",          to = "l",                      mode = mode_nv },
+    --{ from = "L",          to = "5gk",                     mode = mode_nv },
+    --{ from = "K",          to = "5gj",                     mode = mode_nv },
     { from = "H",          to = "K",                      mode = mode_nv },
     { from = "J",          to = "0",                      mode = mode_nv },
     { from = ":",          to = "$",                      mode = mode_nv },
@@ -106,6 +141,14 @@ local nmappings = {
     { from = "R",          to = ":Joshuto<CR>" },
 }
 
+wk.add({
+    {
+        { "<leader>r", group = "rrrr" },
+        { "<leader>rf", "<cmd>split<cr>", desc = "split" },
+        { "<leader>q", group = "[q]uarto" },
+        { "<leader>qp", "<Cmd>lua require'quarto'.quartoPreview()<CR>", desc = "[q]arto[p]review" },
+    }
+})
 
 
 
