@@ -11,13 +11,6 @@ return {
         vim.g.vimtex_compiler_latexmk = {
         aux_dir='build',
         }
-        vim.cmd([[
-syntax enable
-syntax cluster texMathZoneGroup add=texBoldStyle
-syntax cluster texMathMatchGroup add=texBoldStyle
-syntax region texBoldStyle matchgroup=texStatement start='\\vect\s*{' end='}' contains=texMathZoneX contained concealends
-syntax region texBoldStyle matchgroup=texStatement start='\\boldsymbol\s*{' end='}' contains=texMathZoneX contained concealends
-        ]])
         --vim.g.vimtex_complete_enabled = 1
     end,
 }

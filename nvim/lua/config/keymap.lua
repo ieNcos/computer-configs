@@ -28,6 +28,9 @@ nvmap("L", '5gk')
 nvmap("<leader>na", "I# <esc>")
 nvmap("<leader>nx", "^xx")
 
+vmap('"', ':')
+vmap("<leader>f&", ":!column -t -s '&' -o '&'<cr>")
+vmap("<leader>f|", ":!column -t -s '|' -o '|'<cr>")
 
 
 nmap('<leader>dd', function ()

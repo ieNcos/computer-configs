@@ -4,5 +4,5 @@ end
 set -U fish_greeting
 
 if test -z "$DISPLAY"
-	Hyprland
+    Hyprland
 end
