@@ -1,7 +1,16 @@
 local animals = require('misc.style').animals
 vim.o.number = true
---vim.o.relativenumber = true
+vim.o.relativenumber = true
+
+vim.o.mouse = ""
+
+vim.cmd([[ highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE ]])
+vim.o.cursorline = true
+
 vim.o.signcolumn = "auto"
+
+vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:hor20"
+-- ver25
 
 vim.opt.foldmethod = "marker"
 
@@ -39,6 +48,7 @@ vim.cmd([[
 highlight Normal guibg=NONE ctermbg=NONE
 ]])
 
+--{{{ statusline
 vim.cmd [[
 let g:currentmode={
        \ 'n'  : '%#String# NORMAL ',
@@ -57,5 +67,6 @@ let g:currentmode={
 math.randomseed(os.time())
 local i = math.random(#animals)
 vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% %#NonText# ' .. animals[i] .. ' %*'
+--}}}
 
 vim.opt.cmdheight = 1

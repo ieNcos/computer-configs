@@ -85,6 +85,8 @@ keymap = [
 
   { keys = ["p", "p"], commands = ["paste_files"] },
   { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
+  { keys = ["P", "P"], commands = [":shell wl-paste > "] },
+
 
   { keys = ["a"], commands = ["rename_append"] },
   { keys = ["A"], commands = ["rename_prepend"] },

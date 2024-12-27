@@ -1,10 +1,44 @@
 --keymaps
 local wk = require 'which-key'
 
+local in_mathzone = function()
+    local result = vim.treesitter.get_captures_at_cursor(0)
+    local flag = false
+    for _, v in ipairs(result) do
+        if v == "markup.math" then
+            --return true
+            vim.notify("yes")
+            return true
+        end
+    end
+    vim.notify("no")
+    return false
+end
+
+vim.keymap.set("n",    "<C-e>",
+    function ()
+        vim.notify(vim.inspect(vim.treesitter.get_captures_at_cursor(0)))
+    end,
+    { noremap = true, silent = false }
+)
+
+vim.keymap.set("n", "<c-m>",
+    function ()
+        local current_row = vim.api.nvim_win_get_cursor(0)[1]
+        local current_buffer = vim.api.nvim_get_current_buf()
+        local current_line_content = vim.api.nvim_buf_get_lines(
+            current_buffer,
+            current_row-1,
+            current_row,
+            false)
+        vim.notify(current_line_content[1])
+    end, { noremap = true, silent = false }
+)
+
+
 local nmap = function (key, effect)
     vim.keymap.set('n', key, effect, { silent = true, noremap = true })
 end
-
 
 local imap = function (key, effect)
     vim.keymap.set('i', key, effect, { silent = true, noremap = true })
@@ -17,7 +51,37 @@ end
 local nvmap = function (key, effect)
     vim.keymap.set({'n', 'v'}, key, effect, { silent = true, noremap = true })
 end
+nmap("d",
+    function ()
+        local current_row = vim.api.nvim_win_get_cursor(0)[1]
+        local current_buffer = vim.api.nvim_get_current_buf()
+        -- I can use 0 to represent the current buffer, don't need to get it
+        local current_line_content = vim.api.nvim_buf_get_lines(
+            current_buffer,
+            current_row-1,
+            -- unfortunately the index begin from 0, so we need to sub 1
+            current_row,
+            false)[1]
+        -- vim.notify(tostring(current_line_content))
+        if current_line_content == "" then
+            vim.fn.deletebufline(current_buffer, current_row, current_row)
+            -- vim.cmd("normal! dd")
+            -- the difference is about clipboard
+        else
+            vim.cmd("normal! x")
+        end
+    end
+)
 
+nmap("<c-j>", "J")
+nmap("x", "V")
+vmap("x", "j")
+nmap("y", "vy")
+
+nmap("zi", "za")
+nmap("za", "zi")
+
+nvmap("U", "<c-R>")
 nvmap("j", 'h')
 nvmap("k", 'gj')
 nvmap("l", 'gk')
@@ -25,19 +89,39 @@ nvmap(";", 'l')
 nvmap("K", '5gj')
 nvmap("L", '5gk')
 
-nvmap("<leader>na", "I# <esc>")
-nvmap("<leader>nx", "^xx")
+-- nvmap("<leader>na", "I# <esc>")
+-- nvmap("<leader>nx", "^xx")
 
 vmap('"', ':')
 vmap("<leader>f&", ":!column -t -s '&' -o '&'<cr>")
 vmap("<leader>f|", ":!column -t -s '|' -o '|'<cr>")
+vmap("Y", "\"+y")
+
+imap("jk", "<right>")
+-- imap("<esc>", function ()
+--     -- local current_buffer = vim.api.nvim_get_current_buf()
+--     local current_column = vim.api.nvim_win_get_cursor(0)[2]
+--     vim.notify(tostring(current_column))
+--     vim.cmd([[stopinsert]])
+--     if current_column ~= 0 then
+--         local current_column = vim.api.nvim_win_get_cursor(0)[2]
+--         vim.notify("after" .. tostring(current_column))
+--         -- vim.cmd([[normal! l]])
+--     end
+-- end)
+-- nmap("<c-m>", function ()
+    -- local current_column = vim.api.nvim_win_get_cursor(0)[2]
+    -- vim.notify(tostring(current_column))
+-- end)
 
 
 nmap('<leader>dd', function ()
-    vim.diagnostic.disable()
+    vim.diagnostic.enable(false)
 end)
-
-
+nmap('<leader>dD', function ()
+    vim.diagnostic.enable(false)
+    vim.cmd([[:LspStop]])
+end)
 
 
 
@@ -46,14 +130,8 @@ local mode_v = { "v" }
 local mode_i = { "i" }
 local mode_t = { "t" }
 local nmappings = {
-    { from = "S",          to = ":w<CR>" },
-    --	{ from = "Q",             to = ":q<CR>" },
-    --	{ from = ";",             to = ":",                                                                   mode = mode_nv },
-    { from = "Y",          to = "\"+y",                   mode = mode_v },
     { from = "W",          to = "<Cmd>wq!<CR>",           mode = mode_t },
-    --not valid
-    { from = "<c-;>",      to = "<esc>",                  mode = mode_i },
-    --
+
     { from = "<esc>",      to = "<c-\\><c-n>",            mode = mode_t },
     { from = "<esc>",      to = ":" },
     { from = "<leader>bi", to = "<Cmd>%!xxd<CR>" },
@@ -75,26 +153,6 @@ local nmappings = {
     { from = "gl",         to = "gk",                     mode = mode_nv },
     { from = "<Up>",       to = "<c-o>gk",                mode = mode_i },
     { from = "<Down>",     to = "<c-o>gj",                mode = mode_i },
-    { from = "jk",         to = "<Right>",                mode = mode_i },
-    --	{ from = "h",             to = "e",                                                                   mode = mode_nv },
-    --	{ from = "<C-U>",         to = "5<C-y>",                                                              mode = mode_nv },
-    --	{ from = "<C-E>",         to = "5<C-e>",                                                              mode = mode_nv },
-    --	{ from = "ci",            to = "cl", },
-    --	{ from = "cn",            to = "ch", },
-    --	{ from = "ck",            to = "ci", },
-    --	{ from = "c,.",           to = "c%", },
-    --	{ from = "yh",            to = "ye", },
-    --
-    -- Actions
-    { from = "u",          to = "u" },
-    --	{ from = "n",             to = "i",                                                                   mode = mode_nv },
-    --	{ from = "N",             to = "I",                                                                   mode = mode_nv },
-    -- Problems
-    --{ from = "H",             to = "K",                                                                  mode = mode_nv },
-    -- Useful actions
-    --	{ from = ",.",            to = "%",                                                                   mode = mode_nv },
-    --	{ from = "<c-y>",         to = "<ESC>A {}<ESC>i<CR><ESC>ko",                                          mode = mode_i },
-    --	{ from = "\\v",           to = "v$h", },
     { from = "<c-a>",      to = "<ESC>A",                 mode = mode_i },
     { from = "cc",      to = "$zfa{" },
     --
@@ -144,6 +202,11 @@ local nmappings = {
     { from = "R",          to = ":Joshuto<CR>" },
 }
 
+
+for _, mapping in ipairs(nmappings) do
+    vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true })
+end
+
 wk.add({
     {
         { "<leader>r", group = "rrrr" },
@@ -152,27 +215,6 @@ wk.add({
         { "<leader>qp", "<Cmd>lua require'quarto'.quartoPreview()<CR>", desc = "[q]arto[p]review" },
     }
 })
-
-
-
-for _, mapping in ipairs(nmappings) do
-    vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true })
-end
---
---local function run_vim_shortcut(shortcut)
---	local escaped_shortcut = vim.api.nvim_replace_termcodes(shortcut, true, false, true)
---	vim.api.nvim_feedkeys(escaped_shortcut, 'n', true)
---end
---
----- close win below
---vim.keymap.set("n", "<leader>q", function()
---	vim.cmd("TroubleClose")
---	local wins = vim.api.nvim_tabpage_list_wins(0)
---	if #wins > 1 then
---		run_vim_shortcut([[<C-w>j:q<CR>]])
---	end
---end, { noremap = true, silent = true })
-
 
 vim.cmd([[
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'

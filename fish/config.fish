@@ -6,3 +6,5 @@ set -U fish_greeting
 if test -z "$DISPLAY"
     Hyprland
 end
+
+thefuck --alias | source

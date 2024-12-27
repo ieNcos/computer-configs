@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local function fn(
     args,     -- text from i(2) in this example i.e. { { "456" } }
     parent,   -- parent snippet or parent node
@@ -16,27 +17,6 @@ s(
 	{t("Hello, world!")}
 ),
 
-s({trig = "comment",
-dscr = "commentblock",
-snippetType = "snippet",
-wordTrig = true,
-trigEngine = "plain"},fmta([[
-##<>
-## <>
-##<>
-]], {
-    f(function (args, parent, user_args)
-        local len = #args[1][1]
-        local a = string.rep('#', len+1)
-        return a
-    end, {1}),
-    i(1),
-    f(function (args, parent, user_args)
-        local len = #args[1][1]
-        local a = string.rep('#', len+1)
-        return a
-    end, {1}),
-}), {}),
 
 --'╭', '─', '╮', '│', '╯', '─', '╰', '│'
 

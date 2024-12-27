@@ -44,7 +44,7 @@ local compileRun = function()
 		vim.cmd("term node %")
 	elseif ft == 'lua' then
 		split()
-		vim.cmd('exec "term lua53 %"')
+		vim.cmd('exec "term lua %"')
 	elseif ft == 'rust' then
 		split()
 		vim.cmd([[exec "term cargo run"]])

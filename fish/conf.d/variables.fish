@@ -2,6 +2,7 @@
 set -a PATH ~/.local/bin
 set -a PATH ~/.ghcup/bin
 set -a PATH ~/.ghcup/ghc/9.4.8/bin
+set -a PATH ~/.local/share/cargo/bin
 
 set -x XDG_CONFIG_HOME ~/.config
 set -x XDG_CACHE_HOME ~/.cache
