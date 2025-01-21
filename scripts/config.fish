@@ -1,4 +1,4 @@
-#! /usr/bin/fish
+#! /usr/bin/env fish
 ln -s ~/Documents/configs/fish ~/.config/fish
 ln -s ~/Documents/configs/hypr ~/.config/hypr
 ln -s ~/Documents/configs/joshuto ~/.config/joshuto

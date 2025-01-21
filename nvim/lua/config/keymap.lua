@@ -55,7 +55,6 @@ nmap("d",
     function ()
         local current_row = vim.api.nvim_win_get_cursor(0)[1]
         local current_buffer = vim.api.nvim_get_current_buf()
-        -- I can use 0 to represent the current buffer, don't need to get it
         local current_line_content = vim.api.nvim_buf_get_lines(
             current_buffer,
             current_row-1,
@@ -72,6 +71,39 @@ nmap("d",
         end
     end
 )
+nmap("<c-,>",
+    function ()
+        local current_row = vim.api.nvim_win_get_cursor(0)
+        -- vim.print(current_row)
+        local current_column = vim.api.nvim_win_get_cursor(0)[2]
+        vim.print(current_column)
+        vim.cmd("normal! yyp")
+        vim.cmd("normal! "..tostring(current_column+1).."|")
+    end)
+-- nmap("<S-CR>", "o<esc>")
+imap("<C-;>", "<esc>")
+imap("。", ". ")
+
+
+nmap("<C-f>", "<C-f>")
+nmap("<S-right>", "<C-w>>")
+nmap("<S-left>", "<C-w><")
+nmap("<S-up>", "<C-w>+")
+nmap("<S-down>", "<C-w>-")
+
+nmap("<right>", "<C-w>l")
+nmap("<left>", "<C-w>h")
+nmap("<up>", "<C-w>k")
+nmap("<down>", "<C-w>j")
+nmap("<C-k>", "<C-w>j")
+nmap("<C-l>", "<C-w>k")
+imap("<C-k>", "<C-w>j")
+imap("<C-l>", "<C-w>k")
+
+nmap("<C-right>", "<Cmd>vsplit<Cr><C-w>l")
+nmap("<C-left>", "<Cmd>vsplit<Cr>")
+nmap("<C-up>", "<Cmd>split<Cr>")
+nmap("<C-down>", "<Cmd>split<Cr><C-w>j")
 
 nmap("<c-j>", "J")
 nmap("x", "V")
@@ -115,13 +147,13 @@ imap("jk", "<right>")
 -- end)
 
 
-nmap('<leader>dd', function ()
-    vim.diagnostic.enable(false)
-end)
-nmap('<leader>dD', function ()
-    vim.diagnostic.enable(false)
-    vim.cmd([[:LspStop]])
-end)
+-- nmap('<leader>dd', function ()
+--     vim.diagnostic.enable(false)
+-- end)
+-- nmap('<leader>dD', function ()
+--     vim.diagnostic.enable(false)
+--     vim.cmd([[:LspStop]])
+-- end)
 
 
 
@@ -134,9 +166,9 @@ local nmappings = {
 
     { from = "<esc>",      to = "<c-\\><c-n>",            mode = mode_t },
     { from = "<esc>",      to = ":" },
-    { from = "<leader>bi", to = "<Cmd>%!xxd<CR>" },
-    { from = "<leader>bb", to = "<Cmd>%!xxd -r<CR>" },
-    { from = "tt",         to = "<Cmd>NERDTreeToggle<CR>" },
+    -- { from = "<leader>bi", to = "<Cmd>%!xxd<CR>" },
+    -- { from = "<leader>bb", to = "<Cmd>%!xxd -r<CR>" },
+    -- { from = "tt",         to = "<Cmd>NERDTreeToggle<CR>" },
     --	{ from = "`",             to = "~",                                                                   mode = mode_nv },
     --
     -- Movement
@@ -199,7 +231,6 @@ local nmappings = {
     --	{ from = "<leader><esc>", to = "<nop>" },
     --
     --	-- Joshuto
-    { from = "R",          to = ":Joshuto<CR>" },
 }
 
 

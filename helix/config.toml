@@ -6,7 +6,7 @@ mouse = false
 
 [editor.cursor-shape]
 normal = "block"
-#insert = "bar"
+insert = "bar"
 
 [keys.normal]
 j = "move_char_left"
@@ -24,8 +24,13 @@ k = ["move_line_down", "move_line_down", "move_line_down", "move_line_down", "mo
 l = ["move_line_up", "move_line_up", "move_line_up", "move_line_up", "move_line_up"]
 
 
-[keys.insert.j]
-k = "move_char_right"
+[keys.insert]
+"C-f" = "move_char_right"
+"C-b" = "move_char_left"
+"C-n" = "move_line_down"
+"C-p" = "move_line_up"
+"C-e" = ["goto_line_end", "move_char_right"]
+"C-a" = "goto_line_start"
 
 [keys.select]
 h = "collapse_selection"

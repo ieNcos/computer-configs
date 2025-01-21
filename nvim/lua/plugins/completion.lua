@@ -6,9 +6,13 @@ local M = {
             local Rule = require('nvim-autopairs.rule')
             local npairs = require('nvim-autopairs')
             local cond = require('nvim-autopairs.conds')
-            npairs.setup {}
+            npairs.setup {
+                enable_check_bracket_line = false,
+                enable_moveright = false,
+            }
             npairs.remove_rule '`'
 
+-- {{{ (|) + <space> --> ( | )
 --#########################
 --## (|)  + space --> ( | )
 --#########################
@@ -57,6 +61,7 @@ end
 --## end of (|) + space --> ( | )
 --###############################
         end,
+-- }}}
     },
 
 
@@ -126,7 +131,7 @@ end
     				-- 确认
     				-- Accept currently selected item. If none selected, `select` first item.
     				-- Set `select` to `false` to only confirm explicitly selected items.
-    				['<c-f>'] = cmp.mapping.confirm({
+    				['<C-f>'] = cmp.mapping.confirm({
 					select = true,
     				behavior = cmp.ConfirmBehavior.Replace
     				}),

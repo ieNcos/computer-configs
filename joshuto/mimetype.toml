@@ -33,7 +33,8 @@ video_default = [
 ]
 
 text_default = [
-  { command = "nvim" },
+  { command = "emacsclient" },
+  # { command = "nvim" },
   { command = "micro" },
   { command = "gedit", fork = true, silent = true },
   { command = "bat", args = [

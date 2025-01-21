@@ -3,8 +3,6 @@ require('config.global')
 require('config.keymap')
 require('config.autocommands')
 
-require('lsp.setup')
-
 ---- 在 init.lua 中添加以下内容
 --
 ---- 定义一个函数来设置左括号的高亮

@@ -9,7 +9,7 @@ vim.o.cursorline = true
 
 vim.o.signcolumn = "auto"
 
-vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:hor20"
+-- vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:hor20"
 -- ver25
 
 vim.opt.foldmethod = "marker"
